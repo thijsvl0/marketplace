@@ -1,13 +1,13 @@
 import { FiAtSign, FiEye, FiEyeOff } from "react-icons/fi";
+import type { GetServerSideProps, NextPage } from "next";
 import { SignInSchema, signInSchema } from "../../utils/validation/auth";
+import { getSession, signIn } from "next-auth/react";
 
 import Button from "../../components/common/form/Button";
 import FormGroup from "../../components/common/form/FormGroup";
 import Head from "next/head";
 import Link from "next/link";
-import type { NextPage } from "next";
 import type { SubmitHandler } from "react-hook-form";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -106,6 +106,16 @@ const Signin: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if (session) return { redirect: { permanent: true, destination: "/" } };
+
+  return {
+    props: {},
+  };
 };
 
 export default Signin;

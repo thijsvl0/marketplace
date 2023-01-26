@@ -1,16 +1,16 @@
-import { FC, useEffect } from "react";
-import { signOut, useSession } from "next-auth/react";
-
 import Button from "./form/Button";
+import { FC } from "react";
 import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
+import UserMenu from "./navbar/UserMenu";
+import { useSession } from "next-auth/react";
 
 interface NavbarProps {}
 
 const linkItems = [{ link: "/", label: "Products" }];
 
 const Navbar: FC<NavbarProps> = ({}) => {
-  const session = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-1 items-center justify-end md:justify-between">
@@ -30,10 +30,10 @@ const Navbar: FC<NavbarProps> = ({}) => {
       </nav>
       <div className="flex items-center gap-4">
         <div className="sm:flex sm:gap-4">
-          {session.status == "authenticated" ? (
-            <Button variant="secondary" onClick={() => signOut()}>
-              Logout
-            </Button>
+          {session ? (
+            <>
+              <UserMenu />
+            </>
           ) : (
             <>
               <Link href="/auth/signin">
@@ -48,10 +48,10 @@ const Navbar: FC<NavbarProps> = ({}) => {
           )}
         </div>
 
-        <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+        <Button variant="secondary" square={true} className=" md:hidden">
           <span className="sr-only">Toggle menu</span>
-          <FiMenu />
-        </button>
+          <FiMenu size="1.25rem" />
+        </Button>
       </div>
     </div>
   );

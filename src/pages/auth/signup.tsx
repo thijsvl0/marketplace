@@ -1,4 +1,5 @@
 import { FiAtSign, FiEye, FiUser } from "react-icons/fi";
+import type { GetServerSideProps, NextPage } from "next";
 import { SignUpSchema, signUpSchema } from "../../utils/validation/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -6,8 +7,8 @@ import Button from "../../components/common/form/Button";
 import FormGroup from "../../components/common/form/FormGroup";
 import Head from "next/head";
 import Link from "next/link";
-import type { NextPage } from "next";
 import { api } from "../../utils/api";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -110,6 +111,16 @@ const Signup: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if (session) return { redirect: { permanent: true, destination: "/" } };
+
+  return {
+    props: {},
+  };
 };
 
 export default Signup;
