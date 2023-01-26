@@ -5,34 +5,77 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
+import Credentials from "next-auth/providers/credentials";
+import { verify } from "argon2";
+import { signInSchema } from "../../../utils/validation/auth";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    session({ session, user }) {
+    session: ({ session, token }) => {
       if (session.user) {
-        session.user.id = user.id;
+        session.user.id = token.id;
       }
+
       return session;
     },
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+  },
+  jwt: {
+    maxAge: 15 * 24 * 30 * 60,
+  },
+  session: {
+    strategy: "jwt",
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    Credentials({
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+        },
+      },
+      authorize: async (data, req) => {
+        const credentials = await signInSchema.parseAsync(data);
+
+        const user = await prisma.user.findFirst({
+          where: { email: credentials.email },
+        });
+
+        if (!user) return null;
+
+        const isValidPassword = await verify(
+          user.password,
+          credentials.password
+        );
+
+        if (!isValidPassword) return null;
+
+        return {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
+      },
     }),
-    /**
-     * ...add more providers here
-     *
-     * Most other providers require a bit more work than the Discord provider.
-     * For example, the GitHub provider requires you to add the
-     * `refresh_token_expires_in` field to the Account model. Refer to the
-     * NextAuth.js docs for the provider you want to use. Example:
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
+  pages: {
+    signIn: "/auth/signin",
+    newUser: "/auth/signup",
+  },
 };
 
 export default NextAuth(authOptions);

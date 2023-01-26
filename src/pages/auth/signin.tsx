@@ -1,27 +1,42 @@
-import { FiAtSign, FiEye } from "react-icons/fi";
+import { FiAtSign, FiEye, FiEyeOff } from "react-icons/fi";
+import { SignInSchema, signInSchema } from "../../utils/validation/auth";
 
 import Button from "../../components/common/form/Button";
 import FormGroup from "../../components/common/form/FormGroup";
 import Head from "next/head";
-import Input from "../../components/common/form/Input";
+import Link from "next/link";
 import type { NextPage } from "next";
 import type { SubmitHandler } from "react-hook-form";
-import clsx from "clsx";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-
-interface FormInput {
-  email: string;
-  password: string;
-}
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Signin: NextPage = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormInput>();
+    setError,
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+    formState: { errors },
+  } = useForm<SignInSchema>({ resolver: zodResolver(signInSchema) });
+
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const onSubmit: SubmitHandler<SignInSchema> = async (data) => {
+    const res = await signIn("credentials", {
+      ...data,
+      callbackUrl: "/",
+      redirect: false,
+    });
+
+    if (res?.ok) router.push(res?.url ?? "/");
+
+    setError("password", { message: "Your email or password is incorrect" });
+  };
 
   return (
     <>
@@ -47,52 +62,42 @@ const Signin: NextPage = () => {
         >
           <FormGroup
             label="Email"
+            type="email"
             placeholder="Enter email"
             icon={<FiAtSign size="1.25rem" />}
             errors={errors.email}
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Email is incorrect format",
-              },
-            })}
+            {...register("email")}
           />
 
-          <div>
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
-            <Input
-              type="password"
-              placeholder="Enter password"
-              icon={
-                <FiEye
+          <FormGroup
+            label="Password"
+            type={passwordVisible ? "text" : "password"}
+            placeholder="Enter password"
+            icon={
+              passwordVisible ? (
+                <FiEyeOff
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="cursor-pointer"
                   size="1.25rem"
-                  className={clsx(
-                    errors.password ? "text-red-400" : "text-gray-400"
-                  )}
                 />
-              }
-              className={clsx(
-                errors.password &&
-                  "!border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
-              )}
-              {...register("password", {
-                required: "Password is required",
-              })}
-            />
-            {errors.password && (
-              <div className="mt-1 text-red-500">{errors.password.message}</div>
-            )}
-          </div>
+              ) : (
+                <FiEye
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="cursor-pointer"
+                  size="1.25rem"
+                />
+              )
+            }
+            errors={errors.password}
+            {...register("password")}
+          />
 
           <div className="flex items-center justify-between">
             <p className="text-sm text-gray-500">
               No account?
-              <a className="ml-1 underline" href="">
+              <Link className="ml-1 underline" href="/auth/signup">
                 Sign up
-              </a>
+              </Link>
             </p>
 
             <Button type="submit">Sign in</Button>
