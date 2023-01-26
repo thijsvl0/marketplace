@@ -5,20 +5,20 @@ import Link from "next/link";
 
 interface NavbarProps {}
 
-const navItems = [{ link: "/", label: "Products" }];
+const linkItems = [{ link: "/", label: "Products" }];
 
 const Navbar: FC<NavbarProps> = ({}) => {
   return (
     <div className="flex flex-1 items-center justify-end md:justify-between">
       <nav aria-label="Site Nav" className="hidden md:block">
         <ul className="flex items-center gap-6 text-sm">
-          {navItems.map((navItem, key) => (
+          {linkItems.map((linkItem, key) => (
             <li key={key}>
               <Link
                 className="text-gray-500 transition hover:text-gray-500/75"
-                href={navItem.link}
+                href={linkItem.link}
               >
-                {navItem.label}
+                {linkItem.label}
               </Link>
             </li>
           ))}
