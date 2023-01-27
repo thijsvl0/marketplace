@@ -9,7 +9,7 @@ interface HeaderProps {}
 const Header: FC<HeaderProps> = ({}) => {
   return (
     <header aria-label="Site Header" className="bg-white">
-      <Container>
+      <Container className="h-16 items-center">
         <Link className="block text-teal-600" href="/">
           <span className="sr-only">Home</span>
           <FiGift size={"24px"} />

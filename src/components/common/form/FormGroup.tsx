@@ -16,12 +16,16 @@ const FormGroup = React.forwardRef<HTMLInputElement, FormGroupProps>(
   ({ icon, name, label, errors, ...props }, ref) => {
     return (
       <div className={clsx(errors ? "text-red-400" : "text-gray-400")}>
-        <label htmlFor={name} className="sr-only">
+        <label
+          htmlFor={name}
+          className="mb-2 block text-sm font-medium text-gray-700"
+        >
           {label}
         </label>
         <Input
           ref={ref}
           name={name}
+          id={name}
           icon={icon}
           className={clsx(
             errors

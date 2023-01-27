@@ -7,7 +7,10 @@ import { useSession } from "next-auth/react";
 
 interface NavbarProps {}
 
-const linkItems = [{ link: "/", label: "Products" }];
+const linkItems = [
+  { link: "/", label: "Home" },
+  { link: "/products", label: "Products" },
+];
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const { data: session } = useSession();

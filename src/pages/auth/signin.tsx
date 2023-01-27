@@ -29,7 +29,6 @@ const Signin: NextPage = () => {
   const onSubmit: SubmitHandler<SignInSchema> = async (data) => {
     const res = await signIn("credentials", {
       ...data,
-      callbackUrl: "/",
       redirect: false,
     });
 

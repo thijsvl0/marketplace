@@ -16,7 +16,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
-        <Menu.Button className="flex items-center gap-1 text-teal-700">
+        <Menu.Button className="flex items-center gap-1 text-teal-700 focus:outline-none">
           <div>{session.user?.email}</div>
           <div>
             <FiChevronDown />
@@ -31,10 +31,10 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg border border-gray-100 bg-white shadow-lg">
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg border border-gray-100 bg-white shadow-lg focus:outline-none">
             <div className="px-1 py-1">
               <Menu.Item>
-                <Link href="/profile">
+                <Link href="/me">
                   <Button
                     className="w-full text-left font-normal"
                     variant="secondaryTransparent"
