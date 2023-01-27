@@ -11,7 +11,7 @@ const Container: FC<ContainerProps> = ({ children, className }) => {
   return (
     <div
       className={clsx(
-        "mx-auto flex max-w-screen-xl gap-8 px-4 sm:px-6 lg:px-8",
+        "mx-auto max-w-screen-xl gap-8 px-4 sm:px-6 lg:px-8",
         className
       )}
     >
