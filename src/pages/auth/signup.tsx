@@ -40,7 +40,7 @@ const Signup: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sign Up | {process.env.NEXT_PUBLIC_SITE_NAME}</title>
+        <title>{`Sign Up | ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
       </Head>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg text-center">
