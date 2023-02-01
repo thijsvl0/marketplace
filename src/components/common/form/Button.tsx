@@ -36,6 +36,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
           variants[variant],
           className
         )}
+        ref={ref}
         {...props}
       >
         {children}
@@ -43,4 +44,6 @@ const Button: FC<ButtonProps> = React.forwardRef<
     );
   }
 );
+Button.displayName = "button";
+
 export default Button;

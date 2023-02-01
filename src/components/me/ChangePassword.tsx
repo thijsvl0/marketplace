@@ -1,14 +1,12 @@
-import {
-  ChangePasswordSchema,
-  changePasswordSchema,
-} from "../../utils/validation/auth";
-import { SubmitHandler, useForm } from "react-hook-form";
-
 import Button from "../common/form/Button";
+import type { ChangePasswordSchema } from "../../utils/validation/user";
 import type { FC } from "react";
 import { FiEye } from "react-icons/fi";
 import FormGroup from "../common/form/FormGroup";
+import type { SubmitHandler } from "react-hook-form";
 import { api } from "../../utils/api";
+import { changePasswordSchema } from "../../utils/validation/user";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -27,7 +25,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
     resolver: zodResolver(changePasswordSchema),
   });
 
-  const { mutate } = api.auth.changePassword.useMutation({
+  const { mutate } = api.user.changePassword.useMutation({
     onSuccess() {
       router.reload();
     },
@@ -74,7 +72,9 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
         {...register("confirm_password")}
       />
       <div>
-        <Button type="submit">Update</Button>
+        <Button disabled={isSubmitting} type="submit">
+          Update
+        </Button>
       </div>
     </form>
   );

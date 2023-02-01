@@ -20,10 +20,31 @@ model Example {
   updatedAt DateTime @updatedAt
 }
 
+model Image {
+  id String @id @default(cuid())
+
+  key String
+
+  user   User   @relation("UserImages", fields: [userId], references: [id])
+  userId String
+
+  avatars User[] @relation("ImageAvatars")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id       String  @id @default(cuid())
   username String?
   email    String? @unique
   password String
-  image    String?
+
+  avatar   Image?  @relation("ImageAvatars", fields: [avatarId], references: [id])
+  avatarId String?
+
+  images Image[] @relation("UserImages")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
