@@ -2,7 +2,7 @@ import Container from "./Container";
 import type { FC } from "react";
 import { FiGift } from "react-icons/fi";
 import Link from "next/link";
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 
 interface HeaderProps {}
 

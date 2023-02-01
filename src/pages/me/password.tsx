@@ -1,22 +1,22 @@
+import ChangePassword from "../../components/me/ChangePassword";
 import Head from "next/head";
 import InnerLayout from "../../components/me/InnerLayout";
 import type { NextPage } from "next";
 import Section from "../../components/common/Section";
-import YourItems from "../../components/me/YourItems";
 
-const Me: NextPage = () => {
+const Password: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{`My Details | ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+        <title>{`Password | ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
       </Head>
       <InnerLayout>
-        <Section title="Your Items">
-          <YourItems />
+        <Section title="Change Password">
+          <ChangePassword />
         </Section>
       </InnerLayout>
     </>
   );
 };
 
-export default Me;
+export default Password;

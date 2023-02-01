@@ -1,9 +1,4 @@
-import type {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  FC,
-  ReactNode,
-} from "react";
+import type { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
 import React from "react";
 import clsx from "clsx";

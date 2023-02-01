@@ -1,7 +1,8 @@
 import type { InputHTMLAttributes, ReactNode } from "react";
 
-import { FieldError } from "react-hook-form";
+import type { FieldError } from "react-hook-form";
 import Input from "./Input";
+import Label from "./Label";
 import React from "react";
 import clsx from "clsx";
 
@@ -16,12 +17,7 @@ const FormGroup = React.forwardRef<HTMLInputElement, FormGroupProps>(
   ({ icon, name, label, errors, ...props }, ref) => {
     return (
       <div className={clsx(errors ? "text-red-400" : "text-gray-400")}>
-        <label
-          htmlFor={name}
-          className="mb-2 block text-sm font-medium text-gray-700"
-        >
-          {label}
-        </label>
+        <Label htmlFor={name}>{label}</Label>
         <Input
           ref={ref}
           name={name}
@@ -39,4 +35,7 @@ const FormGroup = React.forwardRef<HTMLInputElement, FormGroupProps>(
     );
   }
 );
+
+FormGroup.displayName = "FormGroup";
+
 export default FormGroup;

@@ -1,8 +1,8 @@
-import Button from "./form/Button";
-import { FC } from "react";
+import Button from "../form/Button";
+import type { FC } from "react";
 import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
-import UserMenu from "./navbar/UserMenu";
+import UserMenu from "./UserMenu";
 import { useSession } from "next-auth/react";
 
 interface NavbarProps {}
@@ -22,7 +22,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
           {linkItems.map((linkItem, key) => (
             <li key={key}>
               <Link
-                className="text-gray-500 transition hover:text-gray-500/75"
+                className="text-gray-900 transition hover:text-gray-900/75"
                 href={linkItem.link}
               >
                 {linkItem.label}
