@@ -4,9 +4,11 @@ import React from "react";
 import clsx from "clsx";
 
 const variants = {
-  primary: "bg-teal-600 text-white hover:bg-teal-700",
-  secondary: "bg-gray-100 text-teal-600 hover:text-teal-600/75",
-  secondaryTransparent: "bg-transparent text-teal-700 hover:bg-gray-100",
+  primary:
+    "bg-teal-600 text-white enabled:hover:bg-teal-700 disabled:bg-gray-400",
+  secondary: "bg-gray-100 text-teal-600 enabled:hover:text-teal-600/75",
+  secondaryTransparent:
+    "bg-transparent text-teal-700 enabled:hover:bg-gray-100",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

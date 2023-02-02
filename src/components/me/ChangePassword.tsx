@@ -7,27 +7,25 @@ import type { SubmitHandler } from "react-hook-form";
 import { api } from "../../utils/api";
 import { changePasswordSchema } from "../../utils/validation/user";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface ChangePasswordProps {}
 
 const ChangePassword: FC<ChangePasswordProps> = ({}) => {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
     setError,
     setFocus,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors },
   } = useForm<ChangePasswordSchema>({
     resolver: zodResolver(changePasswordSchema),
   });
 
   const { mutate } = api.user.changePassword.useMutation({
     onSuccess() {
-      router.reload();
+      reset();
     },
     onError(e) {
       setError("old_password", { message: e.message });
@@ -72,9 +70,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
         {...register("confirm_password")}
       />
       <div>
-        <Button disabled={isSubmitting} type="submit">
-          Update
-        </Button>
+        <Button type="submit">Update</Button>
       </div>
     </form>
   );

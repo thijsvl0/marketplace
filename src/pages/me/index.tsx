@@ -1,3 +1,4 @@
+import ChangeAvatar from "../../components/me/ChangeAvatar";
 import Head from "next/head";
 import InnerLayout from "../../components/me/InnerLayout";
 import type { NextPage } from "next";
@@ -13,6 +14,9 @@ const Me: NextPage = () => {
       <InnerLayout>
         <Section title="Your Items">
           <YourItems />
+        </Section>
+        <Section title="Change Avatar">
+          <ChangeAvatar />
         </Section>
       </InnerLayout>
     </>
