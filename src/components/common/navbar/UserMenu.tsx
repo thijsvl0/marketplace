@@ -1,9 +1,10 @@
-import { FC, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { signOut, useSession } from "next-auth/react";
 
 import Button from "../form/Button";
+import type { FC } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { Fragment } from "react";
 import Link from "next/link";
 
 interface UserMenuProps {}

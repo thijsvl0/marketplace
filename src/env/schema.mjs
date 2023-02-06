@@ -21,6 +21,7 @@ export const serverSchema = z.object({
   ),
   AWS_BUCKET: z.string().min(1),
   AWS_BUCKET_REGION: z.string().min(1),
+  AWS_BUCKET_ENDPOINT: z.string().min(1),
   AWS_ACCESS_KEY_ID: z.string().min(1),
   AWS_SECRET_ACCESS_KEY: z.string().min(1),
 });
@@ -37,6 +38,7 @@ export const serverEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   AWS_BUCKET: process.env.AWS_BUCKET,
   AWS_BUCKET_REGION: process.env.AWS_BUCKET_REGION,
+  AWS_BUCKET_ENDPOINT: process.env.AWS_BUCKET_ENDPOINT,
   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
 };

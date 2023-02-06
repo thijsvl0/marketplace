@@ -10,9 +10,13 @@ export const changePasswordSchema = z
     message: "Passwords do not match",
     path: ["confirm_password"],
   });
+export const changeAvatarScheme = z.object({
+  avatar: z.string(),
+});
 export const getUploadUrlSchema = z.object({
   type: z.string(),
 });
 
 export type ChangePasswordSchema = z.infer<typeof changePasswordSchema>;
+export type ChangeAvatarScheme = z.infer<typeof changeAvatarScheme>;
 export type GetUploadUrlSchema = z.infer<typeof getUploadUrlSchema>;

@@ -10,6 +10,7 @@ declare namespace NodeJS {
     NEXTAUTH_URL: string;
     AWS_BUCKET: string;
     AWS_BUCKET_REGION: string;
+    AWS_BUCKET_ENDPOINT: string;
     AWS_ACCESS_KEY_ID: string;
     AWS_SECRET_ACCESS_KEY: string;
   }

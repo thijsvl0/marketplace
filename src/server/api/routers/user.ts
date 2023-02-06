@@ -1,4 +1,5 @@
 import {
+  changeAvatarScheme,
   changePasswordSchema,
   getUploadUrlSchema,
 } from "../../../utils/validation/user";
@@ -44,9 +45,26 @@ export const userRouter = createTRPCRouter({
         message: "Password updated successfully",
       };
     }),
+  changeAvatar: protectedProcedure
+    .input(changeAvatarScheme)
+    .mutation(async ({ input, ctx }) => {
+      const { avatar } = input;
+
+      await ctx.prisma.user.update({
+        data: { avatar: { connect: { key: avatar } } },
+        where: {
+          id: ctx.session.user.id,
+        },
+      });
+
+      return {
+        status: 200,
+        message: "Avatar updated successfully",
+      };
+    }),
   getUploadUrl: protectedProcedure
     .input(getUploadUrlSchema)
-    .query(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       const { type } = input;
 
       const fileName = `${uuidv4()}.${type}`;
@@ -59,21 +77,13 @@ export const userRouter = createTRPCRouter({
         Expires: 100,
       });
 
-      await ctx.prisma.user.update({
-        data: {
-          images: {
-            create: {
-              key,
-            },
-          },
-        },
-        where: {
-          id: ctx.session.user.id,
-        },
+      const image = await ctx.prisma.image.create({
+        data: { key, user: { connect: { id: ctx.session.user.id } } },
       });
 
       return {
         url: presignedUrl,
+        ...image,
       };
     }),
 });
