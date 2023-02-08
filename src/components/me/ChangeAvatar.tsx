@@ -9,7 +9,7 @@ interface ChangeAvatarProps {
 }
 
 const ChangeAvatar: FC<ChangeAvatarProps> = ({ avatar }) => {
-  const [avatarSrc, setAvatarSrc] = useState<string>(
+  const [image, setImage] = useState<string>(
     avatar
       ? process.env.NEXT_PUBLIC_STATIC_URL + avatar
       : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"
@@ -31,9 +31,11 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({ avatar }) => {
       await fetch(uploadUrl.url, { method: "PUT", body: file });
 
       changeAvatar({ avatar: uploadUrl.key });
+
+      setImage(process.env.NEXT_PUBLIC_STATIC_URL + uploadUrl.key);
     };
 
-    setAvatarSrc(URL.createObjectURL(file));
+    setImage(URL.createObjectURL(file));
 
     uploadAvatar().catch(console.error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,7 +50,7 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({ avatar }) => {
     <div className="grid grid-cols-3 gap-x-2">
       <Image
         className="rounded-full"
-        src={avatarSrc}
+        src={image}
         width={300}
         height={300}
         alt="User Avatar"

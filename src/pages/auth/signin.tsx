@@ -32,9 +32,12 @@ const Signin: NextPage = () => {
       redirect: false,
     });
 
-    if (res?.ok) router.push(res?.url ?? "/");
+    if (!res?.ok)
+      return setError("password", {
+        message: "Your email or password is incorrect",
+      });
 
-    setError("password", { message: "Your email or password is incorrect" });
+    router.push(res?.url ?? "/").catch(console.error);
   };
 
   return (
