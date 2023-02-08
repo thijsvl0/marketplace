@@ -7,7 +7,7 @@ interface SectionProps {
 
 const Section: FC<SectionProps> = ({ title, children }) => {
   return (
-    <section className="py-8">
+    <section>
       <div className="flex pb-8">
         <div className="flex flex-col justify-center">
           <h3 className="text-md font-medium text-gray-900">{title}</h3>

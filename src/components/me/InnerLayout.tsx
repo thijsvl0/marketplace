@@ -16,7 +16,9 @@ const InnerLayout: FC<InnerLayoutProps> = ({ children }) => {
         <TabItem link="/me">My Details</TabItem>
         <TabItem link="/me/password">Password</TabItem>
       </TabList>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{children}</div>
+      <div className="grid grid-cols-1 gap-8 py-8 md:grid-cols-2">
+        {children}
+      </div>
     </Container>
   );
 };
