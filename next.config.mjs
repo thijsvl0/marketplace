@@ -17,5 +17,16 @@ const config = {
   images: {
     domains: ["maybe-trapezoid-childhood.s3.us-west-002.backblazeb2.com"],
   },
+
+  experimental: {
+    swcPlugins: [
+      [
+        "next-superjson-plugin",
+        {
+          excluded: [],
+        },
+      ],
+    ],
+  },
 };
 export default config;

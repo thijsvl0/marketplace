@@ -4,17 +4,20 @@ import Image from "next/image";
 import { api } from "../../utils/api";
 import { useState } from "react";
 
-interface ChangeAvatarProps {}
+interface ChangeAvatarProps {
+  avatar: string | undefined;
+}
 
-const ChangeAvatar: FC<ChangeAvatarProps> = ({}) => {
-  const [avatar, setAvatar] = useState<string>(
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"
+const ChangeAvatar: FC<ChangeAvatarProps> = ({ avatar }) => {
+  const [avatarSrc, setAvatarSrc] = useState<string>(
+    avatar
+      ? process.env.NEXT_PUBLIC_STATIC_URL + avatar
+      : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"
   );
   const [file, setFile] = useState<File>();
 
   const { mutateAsync: getUploadUrl } = api.user.getUploadUrl.useMutation();
   const { mutate: changeAvatar } = api.user.changeAvatar.useMutation();
-  const { data: getMe } = api.user.getMe.useQuery();
 
   useEffect(() => {
     if (!file) return;
@@ -30,18 +33,11 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({}) => {
       changeAvatar({ avatar: uploadUrl.key });
     };
 
-    setAvatar(URL.createObjectURL(file));
+    setAvatarSrc(URL.createObjectURL(file));
 
     uploadAvatar().catch(console.error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
-
-  useEffect(() => {
-    if (!getMe) return;
-
-    if (getMe.user.avatar)
-      setAvatar(process.env.NEXT_PUBLIC_STATIC_URL + getMe.user.avatar.key);
-  }, [getMe]);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!e.target.files) return;
@@ -52,7 +48,7 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({}) => {
     <div className="grid grid-cols-3 gap-x-2">
       <Image
         className="rounded-full"
-        src={avatar}
+        src={avatarSrc}
         width={300}
         height={300}
         alt="User Avatar"
