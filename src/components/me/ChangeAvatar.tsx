@@ -14,12 +14,14 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({}) => {
 
   const { mutateAsync: getUploadUrl } = api.user.getUploadUrl.useMutation();
   const { mutate: changeAvatar } = api.user.changeAvatar.useMutation();
+  const { data: getMe } = api.user.getMe.useQuery();
 
   useEffect(() => {
     if (!file) return;
 
     const uploadAvatar = async () => {
       const type = file.type.split("/").pop();
+      if (!type) return;
 
       const uploadUrl = await getUploadUrl({ type });
 
@@ -33,6 +35,13 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({}) => {
     uploadAvatar().catch(console.error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
+
+  useEffect(() => {
+    if (!getMe) return;
+
+    if (getMe.user.avatar)
+      setAvatar(process.env.NEXT_PUBLIC_STATIC_URL + getMe.user.avatar.key);
+  }, [getMe]);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!e.target.files) return;

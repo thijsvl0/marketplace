@@ -62,6 +62,19 @@ export const userRouter = createTRPCRouter({
         message: "Avatar updated successfully",
       };
     }),
+  getMe: protectedProcedure.query(async ({ ctx }) => {
+    const user = await ctx.prisma.user.findFirst({
+      where: { id: ctx.session.user.id },
+      include: { avatar: true },
+    });
+
+    if (!user)
+      throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+
+    return {
+      user,
+    };
+  }),
   getUploadUrl: protectedProcedure
     .input(getUploadUrlSchema)
     .mutation(async ({ input, ctx }) => {

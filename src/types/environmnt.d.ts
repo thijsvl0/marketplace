@@ -2,6 +2,7 @@ declare namespace NodeJS {
   interface ProcessEnv {
     // CLIENT
     NEXT_PUBLIC_SITE_NAME: string;
+    NEXT_PUBLIC_STATIC_URL: string;
 
     // SERVER
     DATABASE_URL: string;
