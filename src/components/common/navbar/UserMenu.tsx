@@ -36,10 +36,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
             <div className="px-1 py-1">
               <Menu.Item>
                 <Link href="/me">
-                  <Button
-                    className="w-full text-left"
-                    variant="secondaryTransparent"
-                  >
+                  <Button className="w-full text-left" variant="transparant">
                     My Profile
                   </Button>
                 </Link>
@@ -47,7 +44,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
               <Menu.Item>
                 <Button
                   className="w-full text-left"
-                  variant="secondaryTransparent"
+                  variant="transparant"
                   onClick={() => signOut()}
                 >
                   Logout

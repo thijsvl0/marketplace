@@ -1,14 +1,15 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { ComponentType, InputHTMLAttributes } from "react";
 
+import type { IconBaseProps } from "react-icons";
 import React from "react";
 import clsx from "clsx";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon?: ReactNode;
+  Icon?: ComponentType<IconBaseProps>;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ icon, className, ...props }, ref) => {
+  ({ Icon, className, ...props }, ref) => {
     return (
       <div className="relative">
         <input
@@ -19,9 +20,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           {...props}
         />
-        {icon && (
+        {Icon && (
           <div className="absolute inset-y-0 right-4 inline-flex items-center">
-            {icon}
+            <Icon size="1.25rem" />
           </div>
         )}
       </div>

@@ -1,16 +1,16 @@
-import { FiAtSign, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiAtSign, FiUnlock } from "react-icons/fi";
 import type { GetServerSideProps, NextPage } from "next";
-import { SignInSchema, signInSchema } from "../../utils/validation/auth";
 import { getSession, signIn } from "next-auth/react";
 
 import Button from "../../components/common/form/Button";
 import FormGroup from "../../components/common/form/FormGroup";
 import Head from "next/head";
 import Link from "next/link";
+import type { SignInSchema } from "../../utils/validation/auth";
 import type { SubmitHandler } from "react-hook-form";
+import { signInSchema } from "../../utils/validation/auth";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const Signin: NextPage = () => {
@@ -23,8 +23,6 @@ const Signin: NextPage = () => {
 
     formState: { errors },
   } = useForm<SignInSchema>({ resolver: zodResolver(signInSchema) });
-
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<SignInSchema> = async (data) => {
     const res = await signIn("credentials", {
@@ -66,30 +64,16 @@ const Signin: NextPage = () => {
             label="Email"
             type="email"
             placeholder="Enter email"
-            icon={<FiAtSign size="1.25rem" />}
+            Icon={FiAtSign}
             errors={errors.email}
             {...register("email")}
           />
 
           <FormGroup
             label="Password"
-            type={passwordVisible ? "text" : "password"}
+            type="password"
             placeholder="Enter password"
-            icon={
-              passwordVisible ? (
-                <FiEyeOff
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                  className="cursor-pointer"
-                  size="1.25rem"
-                />
-              ) : (
-                <FiEye
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                  className="cursor-pointer"
-                  size="1.25rem"
-                />
-              )
-            }
+            Icon={FiUnlock}
             errors={errors.password}
             {...register("password")}
           />

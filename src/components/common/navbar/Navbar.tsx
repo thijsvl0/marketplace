@@ -43,7 +43,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
                 <Button>Login</Button>
               </Link>
               <Link href="/auth/signup">
-                <Button variant="secondary" className="hidden sm:block">
+                <Button variant="outline" className="hidden sm:block">
                   Register
                 </Button>
               </Link>
@@ -51,7 +51,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
           )}
         </div>
 
-        <Button variant="secondary" square={true} className=" md:hidden">
+        <Button variant="outline" size="square" className="md:hidden">
           <span className="sr-only">Toggle menu</span>
           <FiMenu size="1.25rem" />
         </Button>

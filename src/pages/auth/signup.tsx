@@ -1,14 +1,16 @@
-import { FiAtSign, FiEye, FiUser } from "react-icons/fi";
+import { FiAtSign, FiUnlock, FiUser } from "react-icons/fi";
 import type { GetServerSideProps, NextPage } from "next";
-import { SignUpSchema, signUpSchema } from "../../utils/validation/auth";
-import { SubmitHandler, useForm } from "react-hook-form";
 
 import Button from "../../components/common/form/Button";
 import FormGroup from "../../components/common/form/FormGroup";
 import Head from "next/head";
 import Link from "next/link";
+import type { SignUpSchema } from "../../utils/validation/auth";
+import type { SubmitHandler } from "react-hook-form";
 import { api } from "../../utils/api";
 import { getSession } from "next-auth/react";
+import { signUpSchema } from "../../utils/validation/auth";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -25,7 +27,7 @@ const Signup: NextPage = () => {
 
   const { mutate } = api.auth.signUp.useMutation({
     onSuccess() {
-      router.push("/auth/signin");
+      router.push("/auth/signin").catch(console.error);
     },
     onError(e) {
       setError("email", { message: e.message });
@@ -63,7 +65,7 @@ const Signup: NextPage = () => {
             label="Username"
             type="username"
             placeholder="Enter username"
-            icon={<FiUser size="1.25rem" />}
+            Icon={FiUser}
             errors={errors.username}
             {...register("username")}
           />
@@ -71,7 +73,7 @@ const Signup: NextPage = () => {
             label="Email"
             type="email"
             placeholder="Enter email"
-            icon={<FiAtSign size="1.25rem" />}
+            Icon={FiAtSign}
             errors={errors.email}
             {...register("email")}
           />
@@ -80,7 +82,7 @@ const Signup: NextPage = () => {
             label="Password"
             type="password"
             placeholder="Enter password"
-            icon={<FiEye size="1.25rem" />}
+            Icon={FiUnlock}
             errors={errors.password}
             {...register("password", {
               required: "Password is required",
@@ -91,7 +93,7 @@ const Signup: NextPage = () => {
             label="Confirm password"
             type="password"
             placeholder="Confirm password"
-            icon={<FiEye size="1.25rem" />}
+            Icon={FiUnlock}
             errors={errors.confirm_password}
             {...register("confirm_password")}
           />

@@ -43,7 +43,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
         label="Old Password"
         type="password"
         placeholder="Enter old password"
-        icon={<FiEye size="1.25rem" />}
+        Icon={FiEye}
         errors={errors.old_password}
         {...register("old_password", {
           required: "Old password is required",
@@ -54,7 +54,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
         label="Password"
         type="password"
         placeholder="Enter password"
-        icon={<FiEye size="1.25rem" />}
+        Icon={FiEye}
         errors={errors.password}
         {...register("password", {
           required: "Password is required",
@@ -65,7 +65,7 @@ const ChangePassword: FC<ChangePasswordProps> = ({}) => {
         label="Confirm password"
         type="password"
         placeholder="Confirm password"
-        icon={<FiEye size="1.25rem" />}
+        Icon={FiEye}
         errors={errors.confirm_password}
         {...register("confirm_password")}
       />

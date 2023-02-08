@@ -69,13 +69,9 @@ const ChangeAvatar: FC<ChangeAvatarProps> = ({ avatar }) => {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center gap-y-4 ">
+      <div className="flex flex-col items-start justify-center gap-y-4 ">
         <Button onClick={() => inputRef.current?.click()}>Change</Button>
-        <Button
-          variant="secondaryTransparent"
-          className="flex items-center gap-x-2"
-        >
-          <FiTrash size="1.25rem" />
+        <Button variant="outline" color="danger" Icon={FiTrash}>
           Delete
         </Button>
       </div>

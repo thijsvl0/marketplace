@@ -6,12 +6,12 @@ import {
   FiTwitter,
 } from "react-icons/fi";
 
-import { FC } from "react";
+import type { FC } from "react";
 import Link from "next/link";
 
 interface FooterProps {}
 
-let linkItems = [
+const linkItems = [
   { link: "/", label: "Home" },
   { link: "/auth/signin", label: "Login" },
 ];
