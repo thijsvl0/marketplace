@@ -1,16 +1,12 @@
-import {
-  CreateProductSchema,
-  createProductSchema,
-} from "../../utils/validation/product";
-import { SubmitHandler, useForm } from "react-hook-form";
-
 import Button from "../common/form/Button";
-import { Dialog } from "@headlessui/react";
-import { FC } from "react";
+import type { CreateProductSchema } from "../../utils/validation/product";
+import type { FC } from "react";
 import FormGroup from "../common/form/FormGroup";
 import Modal from "../common/modal/Modal";
-import TextArea from "../common/form/Textarea";
+import type { SubmitHandler } from "react-hook-form";
 import Title from "../common/modal/Title";
+import { createProductSchema } from "../../utils/validation/product";
+import { useForm } from "react-hook-form";
 import { useProductStore } from "../../stores/Product";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -60,16 +56,16 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
           </form>
         </div>
       </div>
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-5 sm:gap-4">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-5">
         <Button
-          className="col-span-2 justify-center"
+          className="justify-center sm:col-span-2"
           variant="outline"
           onClick={() => setIsCreateModalOpen(false)}
         >
           Cancel
         </Button>
         <Button
-          className="col-span-3 justify-center"
+          className="row-start-1 justify-center sm:col-span-2 sm:row-span-1"
           onClick={() => setIsCreateModalOpen(false)}
         >
           Create

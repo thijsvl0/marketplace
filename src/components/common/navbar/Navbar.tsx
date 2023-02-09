@@ -51,7 +51,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
 
         <Button variant="outline" size="square" className="md:hidden">
           <span className="sr-only">Toggle menu</span>
-          <FiMenu size="1.25rem" />
+          <FiMenu size={"1.25rem"} />
         </Button>
       </div>
     </div>

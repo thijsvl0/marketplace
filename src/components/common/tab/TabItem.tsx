@@ -1,23 +1,15 @@
 import type { FC, ReactNode } from "react";
-import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import clsx from "clsx";
-import { useRouter } from "next/router";
 
 interface TabItemProps {
   children: ReactNode;
   link: string;
+  isActive?: boolean;
 }
 
-const TabItem: FC<TabItemProps> = ({ children, link }) => {
-  const router = useRouter();
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsActive(router.pathname == link);
-  }, [router, link]);
-
+const TabItem: FC<TabItemProps> = ({ children, link, isActive = false }) => {
   return (
     <li>
       <Link className="relative block p-4" href={link}>

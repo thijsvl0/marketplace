@@ -66,7 +66,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
         ref={ref}
         {...props}
       >
-        {Icon && <Icon size="1.25rem" />}
+        {Icon && <Icon size={"1.25rem"} />}
         {children}
       </button>
     );
