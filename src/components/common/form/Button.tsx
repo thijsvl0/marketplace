@@ -21,13 +21,13 @@ const variants: Record<Variant, Record<Color, string>> = {
   },
   outline: {
     primary:
-      "bg-transparent border border-teal-700/25 text-teal-600 enabled:hover:bg-gray-100",
+      "bg-transparent border border-teal-700/25 text-teal-600 enabled:hover:bg-teal-50",
     danger:
-      "bg-transparent border border-red-500/25 text-red-500 enabled:hover:bg-gray-100",
+      "bg-transparent border border-red-500/25 text-red-500 enabled:hover:bg-red-50",
   },
   transparant: {
-    primary: "bg-transparent text-teal-600 enabled:hover:bg-gray-100",
-    danger: "bg-transparent text-red-500 enabled:hover:bg-gray-100",
+    primary: "bg-transparent text-teal-600 enabled:hover:bg-teal-50",
+    danger: "bg-transparent text-red-500 enabled:hover:bg-red-50",
   },
 };
 

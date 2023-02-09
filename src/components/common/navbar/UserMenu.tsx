@@ -6,6 +6,7 @@ import type { FC } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Fragment } from "react";
 import Link from "next/link";
+import { useProductStore } from "../../../stores/Product";
 
 interface UserMenuProps {}
 
@@ -13,6 +14,10 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
   const { data: session } = useSession();
 
   if (!session) return null;
+
+  const setIsCreateModalOpen = useProductStore(
+    (state) => state.setIsCreateModalOpen
+  );
 
   return (
     <>
@@ -34,6 +39,14 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg border border-gray-100 bg-white shadow-lg focus:outline-none">
             <div className="px-1 py-1">
+              <Menu.Item>
+                <Button
+                  className="w-full text-left"
+                  onClick={() => setIsCreateModalOpen(true)}
+                >
+                  Start Selling!
+                </Button>
+              </Menu.Item>
               <Menu.Item>
                 <Link href="/me">
                   <Button className="w-full text-left" variant="transparant">
