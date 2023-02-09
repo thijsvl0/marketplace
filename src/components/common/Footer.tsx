@@ -6,6 +6,7 @@ import {
   FiTwitter,
 } from "react-icons/fi";
 
+import A from "./A";
 import type { FC } from "react";
 import Link from "next/link";
 
@@ -43,11 +44,8 @@ const Footer: FC<FooterProps> = ({}) => {
           <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             {linkItems.map((linkItem, key) => (
               <li key={key}>
-                <Link
-                  className="text-gray-700 transition hover:text-gray-700/75"
-                  href={linkItem.link}
-                >
-                  {linkItem.label}
+                <Link href={linkItem.link} passHref legacyBehavior>
+                  <A color="secondary">{linkItem.label}</A>
                 </Link>
               </li>
             ))}
@@ -57,15 +55,15 @@ const Footer: FC<FooterProps> = ({}) => {
         <ul className="mt-12 flex justify-center gap-6 md:gap-8">
           {socialItems.map((socialItem, key) => (
             <li key={key}>
-              <a
+              <A
                 href={socialItem.link}
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-700 transition hover:text-gray-700/75"
+                color="secondary"
               >
                 <span className="sr-only">{socialItem.label}</span>
                 {socialItem.icon}
-              </a>
+              </A>
             </li>
           ))}
         </ul>

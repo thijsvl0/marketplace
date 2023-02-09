@@ -1,3 +1,4 @@
+import A from "../A";
 import Button from "../form/Button";
 import type { FC } from "react";
 import { FiMenu } from "react-icons/fi";
@@ -21,11 +22,8 @@ const Navbar: FC<NavbarProps> = ({}) => {
         <ul className="flex items-center gap-6 text-sm">
           {linkItems.map((linkItem, key) => (
             <li key={key}>
-              <Link
-                className="text-gray-900 transition hover:text-gray-900/75"
-                href={linkItem.link}
-              >
-                {linkItem.label}
+              <Link href={linkItem.link} passHref legacyBehavior>
+                <A>{linkItem.label}</A>
               </Link>
             </li>
           ))}
