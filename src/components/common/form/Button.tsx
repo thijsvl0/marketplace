@@ -8,8 +8,9 @@ type Color = "primary" | "danger";
 type Variant = "outline" | "solid" | "transparant";
 
 const sizes = {
-  md: "py-2.5 px-5",
-  square: "py-2.5 px-2.5",
+  md: "py-2.5 px-5 rounded-md",
+  square: "p-2.5 rounded-md",
+  round: "p-2.5 rounded-full",
 };
 
 const variants: Record<Variant, Record<Color, string>> = {
@@ -35,7 +36,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   color?: Color;
   size?: keyof typeof sizes;
-  children: ReactNode;
+  children?: ReactNode;
   Icon?: ComponentType<IconBaseProps>;
 }
 
@@ -58,7 +59,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
     return (
       <button
         className={clsx(
-          "flex items-center justify-start gap-x-2 rounded-md text-sm font-medium transition",
+          "flex items-center justify-start gap-x-2 text-sm font-medium transition",
           sizes[size],
           variants[variant][color],
           className

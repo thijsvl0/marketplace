@@ -5,7 +5,7 @@ import Tbody from "../common/table/Tbody";
 import Td from "../common/table/Td";
 import Th from "../common/table/Th";
 import Thead from "../common/table/Thead";
-import { useProductStore } from "../../stores/Product";
+import { useProductStore } from "../../stores/product";
 
 interface YourItemsProps {}
 

@@ -6,7 +6,7 @@ import type { FC } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Fragment } from "react";
 import Link from "next/link";
-import { useProductStore } from "../../../stores/Product";
+import { useProductStore } from "../../../stores/product";
 
 interface UserMenuProps {}
 
