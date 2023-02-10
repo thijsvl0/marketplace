@@ -12,12 +12,11 @@ interface UserMenuProps {}
 
 const UserMenu: FC<UserMenuProps> = ({}) => {
   const { data: session } = useSession();
-
-  if (!session) return null;
-
   const setIsCreateModalOpen = useProductStore(
     (state) => state.setIsCreateModalOpen
   );
+
+  if (!session) return null;
 
   return (
     <>
