@@ -25,6 +25,7 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateProductSchema>({
     resolver: zodResolver(createProductSchema),
@@ -33,7 +34,7 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
   const onSubmit: SubmitHandler<CreateProductSchema> = (data) => {
     console.log(data);
   };
-  console.log(errors.images);
+
   return (
     <Modal isOpen={isCreateModalOpen} setIsOpen={setIsCreateModalOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,13 +72,14 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
               <Label>Images</Label>
               <div className="flex flex-wrap justify-start gap-2">
                 {Array.from({ length: 3 }).map((_x, i) => (
-                  <ImageUpload key={i} {...register(`images.${i}`)} />
+                  <ImageUpload
+                    key={i}
+                    onChange={(value) => setValue(`images.${i}`, value ?? "")}
+                  />
                 ))}
               </div>
               {errors.images && (
-                <div className="mt-1 text-red-500">
-                  {errors.images.message?.toString()}
-                </div>
+                <div className="mt-1 text-red-500">{errors.images.message}</div>
               )}
             </div>
           </div>
