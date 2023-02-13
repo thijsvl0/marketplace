@@ -11,20 +11,18 @@ import { api } from "../../../utils/api";
 import clsx from "clsx";
 import { useState } from "react";
 
-interface ImageUploadProps extends InputHTMLAttributes<HTMLInputElement> {
-  type?: "file";
-}
+interface ImageUploadProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const ImageUpload = React.forwardRef<HTMLInputElement, ImageUploadProps>(
-  ({ className, type = "file", name, ...props }, ref) => {
+  ({ className, name, ...props }, ref) => {
     const [image, setImage] = useState<string>();
-    const [key, setKey] = useState<string>();
+    const [key, setKey] = useState<string>("");
 
     const { mutateAsync: getUploadUrl } = api.user.getUploadUrl.useMutation();
 
     const handleOnRemove: MouseEventHandler<HTMLButtonElement> = () => {
       setImage(undefined);
-      setKey(undefined);
+      setKey("");
     };
 
     const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -52,10 +50,7 @@ const ImageUpload = React.forwardRef<HTMLInputElement, ImageUploadProps>(
       <div>
         <div className="h-24 w-24">
           {image ? (
-            <div
-              className="relative h-full overflow-hidden rounded-md"
-              onClick={console.log}
-            >
+            <div className="relative h-full overflow-hidden rounded-md">
               <Image
                 src={image}
                 fill={true}
@@ -77,16 +72,15 @@ const ImageUpload = React.forwardRef<HTMLInputElement, ImageUploadProps>(
               )}
             >
               <FiUpload size="1.5rem" />
-              <input type={type} className="hidden" onChange={handleOnChange} />
+              <input type="file" className="hidden" onChange={handleOnChange} />
             </label>
           )}
         </div>
         <input
           ref={ref}
           type="text"
-          id={name}
           name={name}
-          value={key ?? ""}
+          value={key}
           className="hidden"
           readOnly
           {...props}

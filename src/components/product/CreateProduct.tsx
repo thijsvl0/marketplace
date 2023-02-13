@@ -8,6 +8,7 @@ import Label from "../common/form/Label";
 import Modal from "../common/modal/Modal";
 import type { SubmitHandler } from "react-hook-form";
 import Title from "../common/modal/Title";
+import clsx from "clsx";
 import { createProductSchema } from "../../utils/validation/product";
 import { useForm } from "react-hook-form";
 import { useProductStore } from "../../stores/product";
@@ -63,13 +64,22 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
               errors={errors.description}
               {...register("description")}
             />
-            <FormGroup
-              label="Images"
-              variant="image"
-              length={3}
-              errors={errors.images}
-              {...register("images")}
-            />
+
+            <div
+              className={clsx(errors.images ? "text-red-400" : "text-gray-400")}
+            >
+              <Label>Images</Label>
+              <div className="flex flex-wrap justify-start gap-2">
+                {Array.from({ length: 3 }).map((_x, i) => (
+                  <ImageUpload key={i} {...register(`images.${i}`)} />
+                ))}
+              </div>
+              {errors.images && (
+                <div className="mt-1 text-red-500">
+                  {errors.images.message?.toString()}
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-5">

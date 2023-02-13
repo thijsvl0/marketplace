@@ -7,7 +7,6 @@ import type {
 import type { FieldError, Merge } from "react-hook-form";
 
 import type { IconBaseProps } from "react-icons";
-import ImageUpload from "./ImageUpload";
 import Input from "./Input";
 import Label from "./Label";
 import React from "react";
@@ -24,20 +23,11 @@ interface SelectAttributes extends SelectHTMLAttributes<HTMLSelectElement> {
   variant: "select";
 }
 
-interface ImageAttributes extends InputHTMLAttributes<HTMLInputElement> {
-  variant: "image";
-  length: number;
-}
-
 interface InputAttributes extends InputHTMLAttributes<HTMLInputElement> {
   variant?: "input";
 }
 
-type PolymorphicProps =
-  | TextAreaAttributes
-  | SelectAttributes
-  | ImageAttributes
-  | InputAttributes;
+type PolymorphicProps = TextAreaAttributes | SelectAttributes | InputAttributes;
 
 type PolymorphicElement = HTMLTextAreaElement &
   HTMLSelectElement &
@@ -68,20 +58,6 @@ const FormGroup = React.forwardRef<PolymorphicElement, FormGroupProps>(
             >
               {children}
             </TextArea>
-          );
-        }
-        case "image": {
-          return (
-            <div className="flex flex-wrap justify-start gap-2">
-              {Array.from({ length: props.length }).map((_x, i) => (
-                <ImageUpload
-                  key={i}
-                  ref={ref}
-                  id={`${name ?? ""}.${i + 1}`}
-                  name={`${name ?? ""}.${i + 1}`}
-                />
-              ))}
-            </div>
           );
         }
         case "select": {
