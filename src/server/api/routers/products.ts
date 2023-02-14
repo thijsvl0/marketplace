@@ -1,4 +1,4 @@
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 import { createProductSchema } from "../../../utils/validation/product";
 
@@ -6,6 +6,15 @@ export const productRouter = createTRPCRouter({
   getMyProducts: protectedProcedure.query(async ({ ctx }) => {
     const products = await ctx.prisma.product.findMany({
       where: { user: { id: ctx.session.user.id } },
+      include: { images: true },
+    });
+
+    return {
+      products,
+    };
+  }),
+  getProducts: publicProcedure.query(async ({ ctx }) => {
+    const products = await ctx.prisma.product.findMany({
       include: { images: true },
     });
 
