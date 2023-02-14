@@ -1,6 +1,6 @@
 import React from "react";
 import type { TextareaHTMLAttributes } from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
@@ -9,7 +9,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <textarea
         ref={ref}
-        className={clsx(
+        className={twMerge(
           "w-full rounded-lg border border-gray-200 p-4 text-sm shadow-sm",
           className
         )}

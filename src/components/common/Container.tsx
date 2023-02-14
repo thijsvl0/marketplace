@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface ContainerProps {
   children: ReactNode;
@@ -10,7 +10,7 @@ interface ContainerProps {
 const Container: FC<ContainerProps> = ({ children, className }) => {
   return (
     <div
-      className={clsx(
+      className={twMerge(
         "mx-auto max-w-screen-xl gap-8 px-4 sm:px-6 lg:px-8",
         className
       )}

@@ -4,7 +4,7 @@ import { FiUpload, FiX } from "react-icons/fi";
 import Image from "next/image";
 import React from "react";
 import { api } from "../../../utils/api";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 
 interface ImageUploadProps {
@@ -63,7 +63,7 @@ const ImageUpload: FC<ImageUploadProps> = ({ className, onChange }) => {
           </div>
         ) : (
           <label
-            className={clsx(
+            className={twMerge(
               "flex h-full cursor-pointer items-center justify-center rounded-md border-2 border-dashed border-gray-200 text-gray-400",
               className
             )}

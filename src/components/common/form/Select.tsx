@@ -1,6 +1,6 @@
 import React from "react";
 import type { SelectHTMLAttributes } from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {}
 
@@ -9,7 +9,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <select
         ref={ref}
-        className={clsx(
+        className={twMerge(
           "w-full rounded-lg border border-gray-200 p-4 text-sm shadow-sm",
           className
         )}

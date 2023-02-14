@@ -1,7 +1,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
 import React from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 type Color = "primary" | "secondary";
 
@@ -19,7 +19,7 @@ const A = React.forwardRef<HTMLAnchorElement, AProps>(
   ({ children, color = "primary", className, ...props }, ref) => {
     return (
       <a
-        className={clsx("transition", colors[color], className)}
+        className={twMerge("transition", colors[color], className)}
         ref={ref}
         {...props}
       >

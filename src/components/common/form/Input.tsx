@@ -2,7 +2,7 @@ import type { ComponentType, InputHTMLAttributes } from "react";
 
 import type { IconBaseProps } from "react-icons";
 import React from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: ComponentType<IconBaseProps>;
@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative">
         <input
           ref={ref}
-          className={clsx(
+          className={twMerge(
             "w-full rounded-lg border border-gray-200 p-4 text-sm shadow-sm",
             Icon && "pr-12",
             className

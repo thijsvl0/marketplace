@@ -1,6 +1,6 @@
 import type { FC, LabelHTMLAttributes, ReactNode } from "react";
 
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 const Label: FC<LabelProps> = ({ children, className, ...props }) => {
   return (
     <label
-      className={clsx(
+      className={twMerge(
         "mb-2 block text-sm font-medium text-gray-900",
         className
       )}

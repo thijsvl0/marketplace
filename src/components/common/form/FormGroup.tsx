@@ -12,7 +12,7 @@ import Label from "./Label";
 import React from "react";
 import Select from "./Select";
 import TextArea from "./Textarea";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 interface TextAreaAttributes
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -49,9 +49,9 @@ const FormGroup = React.forwardRef<PolymorphicElement, FormGroupProps>(
               ref={ref}
               id={name}
               name={name}
-              className={clsx(
+              className={twMerge(
                 errors
-                  ? "!border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
+                  ? "border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
                   : "text-black"
               )}
               {...props}
@@ -66,9 +66,9 @@ const FormGroup = React.forwardRef<PolymorphicElement, FormGroupProps>(
               ref={ref}
               id={name}
               name={name}
-              className={clsx(
+              className={twMerge(
                 errors
-                  ? "!border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
+                  ? "border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
                   : "text-black"
               )}
               {...props}
@@ -82,9 +82,9 @@ const FormGroup = React.forwardRef<PolymorphicElement, FormGroupProps>(
               id={name}
               name={name}
               Icon={Icon}
-              className={clsx(
+              className={twMerge(
                 errors
-                  ? "!border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
+                  ? "border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500"
                   : "text-black"
               )}
               {...props}
@@ -95,7 +95,7 @@ const FormGroup = React.forwardRef<PolymorphicElement, FormGroupProps>(
     };
 
     return (
-      <div className={clsx(errors ? "text-red-400" : "text-gray-400")}>
+      <div className={twMerge(errors ? "text-red-400" : "text-gray-400")}>
         <Label htmlFor={name}>{label}</Label>
         {getInput()}
         {errors && <div className="mt-1 text-red-500">{errors.message}</div>}

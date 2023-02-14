@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ComponentType, FC, ReactNode } from "react";
 
 import type { IconBaseProps } from "react-icons";
 import React from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 type Color = "primary" | "danger";
 type Variant = "outline" | "solid" | "transparant";
@@ -58,7 +58,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
   ) => {
     return (
       <button
-        className={clsx(
+        className={twMerge(
           "flex items-center justify-start gap-x-2 text-sm font-medium transition",
           sizes[size],
           variants[variant][color],

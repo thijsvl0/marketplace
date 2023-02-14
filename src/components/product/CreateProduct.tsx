@@ -8,8 +8,8 @@ import Label from "../common/form/Label";
 import Modal from "../common/modal/Modal";
 import type { SubmitHandler } from "react-hook-form";
 import Title from "../common/modal/Title";
-import clsx from "clsx";
 import { createProductSchema } from "../../utils/validation/product";
+import { twMerge } from "tailwind-merge";
 import { useForm } from "react-hook-form";
 import { useProductStore } from "../../stores/product";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,7 +67,9 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
             />
 
             <div
-              className={clsx(errors.images ? "text-red-400" : "text-gray-400")}
+              className={twMerge(
+                errors.images ? "text-red-400" : "text-gray-400"
+              )}
             >
               <Label>Images</Label>
               <div className="flex flex-wrap justify-start gap-2">
