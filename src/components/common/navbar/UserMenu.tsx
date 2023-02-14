@@ -11,10 +11,26 @@ import { useProductStore } from "../../../stores/product";
 interface UserMenuProps {}
 
 const UserMenu: FC<UserMenuProps> = ({}) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const setIsCreateModalOpen = useProductStore(
     (state) => state.setIsCreateModalOpen
   );
+
+  if (status == "loading") return null;
+
+  if (status == "unauthenticated")
+    return (
+      <>
+        <Link href="/auth/signin">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/auth/signup">
+          <Button variant="outline" className="hidden sm:block">
+            Register
+          </Button>
+        </Link>
+      </>
+    );
 
   if (!session) return null;
 

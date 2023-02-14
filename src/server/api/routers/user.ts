@@ -82,7 +82,7 @@ export const userRouter = createTRPCRouter({
 
       const fileName = `${uuidv4()}.${type}`;
 
-      const key = `static/${fileName}`;
+      const key = `static/${ctx.session.user.id}/${fileName}`;
 
       const presignedUrl = s3.getSignedUrl("putObject", {
         Bucket: process.env.AWS_BUCKET,

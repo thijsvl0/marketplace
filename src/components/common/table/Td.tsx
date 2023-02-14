@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react";
 
 interface TdProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Td: FC<TdProps> = ({ children }) => {

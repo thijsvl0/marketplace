@@ -8,6 +8,7 @@ import Label from "../common/form/Label";
 import Modal from "../common/modal/Modal";
 import type { SubmitHandler } from "react-hook-form";
 import Title from "../common/modal/Title";
+import { api } from "../../utils/api";
 import { createProductSchema } from "../../utils/validation/product";
 import { twMerge } from "tailwind-merge";
 import { useForm } from "react-hook-form";
@@ -26,13 +27,21 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<CreateProductSchema>({
     resolver: zodResolver(createProductSchema),
   });
 
+  const { mutate } = api.product.createProduct.useMutation({
+    onSuccess() {
+      reset();
+      setIsCreateModalOpen(false);
+    },
+  });
+
   const onSubmit: SubmitHandler<CreateProductSchema> = (data) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (

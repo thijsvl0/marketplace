@@ -5,6 +5,7 @@ import Tbody from "../common/table/Tbody";
 import Td from "../common/table/Td";
 import Th from "../common/table/Th";
 import Thead from "../common/table/Thead";
+import { api } from "../../utils/api";
 import { useProductStore } from "../../stores/product";
 
 interface YourItemsProps {}
@@ -13,6 +14,10 @@ const YourItems: FC<YourItemsProps> = ({}) => {
   const setIsCreateModalOpen = useProductStore(
     (state) => state.setIsCreateModalOpen
   );
+
+  const { data: getMyProducts, status } = api.product.getMyProducts.useQuery();
+
+  if (status == "loading") return null;
 
   return (
     <>
@@ -26,9 +31,14 @@ const YourItems: FC<YourItemsProps> = ({}) => {
             </tr>
           </Thead>
           <Tbody>
-            <tr>
-              <Td>No Items</Td>
-            </tr>
+            {getMyProducts &&
+              getMyProducts.products.map((product) => (
+                <tr key={product.id}>
+                  <Td>{product.title}</Td>
+                  <Td>{product.price.toString()}</Td>
+                  <Td></Td>
+                </tr>
+              ))}
           </Tbody>
         </Table>
         <Button onClick={() => setIsCreateModalOpen(true)}>
