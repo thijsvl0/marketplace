@@ -10,7 +10,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <textarea
         ref={ref}
         className={twMerge(
-          "w-full rounded-lg border border-gray-200 p-4 text-sm shadow-sm",
+          "w-full rounded-lg border border-gray-200 p-4 shadow-sm sm:text-sm",
           className
         )}
         {...props}

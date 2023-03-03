@@ -59,7 +59,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
     return (
       <button
         className={twMerge(
-          "flex items-center justify-start gap-x-2 text-sm font-medium transition",
+          "flex items-center justify-start gap-x-2 font-medium transition sm:text-sm",
           sizes[size],
           variants[variant][color],
           className

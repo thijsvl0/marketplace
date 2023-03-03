@@ -10,7 +10,7 @@ const Label: FC<LabelProps> = ({ children, className, ...props }) => {
   return (
     <label
       className={twMerge(
-        "mb-2 block text-sm font-medium text-gray-900",
+        "mb-2 block font-medium text-gray-900 sm:text-sm",
         className
       )}
       {...props}
