@@ -29,7 +29,7 @@ const Products: NextPage = () => {
               </div>
 
               <div className="mt-3">
-                <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
+                <h3 className="truncate font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
                   {product.title}
                 </h3>
                 <p className="mt-1 text-sm text-gray-700">
