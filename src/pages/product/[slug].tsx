@@ -8,7 +8,6 @@ import type {
 import Container from "../../components/common/Container";
 import type { ParsedUrlQuery } from "querystring";
 import ProductDetail from "../../components/product/ProductDetail";
-import { prisma } from "../../server/db";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -32,6 +31,8 @@ export const getStaticPaths: GetStaticPaths = () => {
 };
 
 export const getStaticProps = async (ctx: GetStaticPropsContext) => {
+  const { prisma } = await import("../../server/db");
+
   const { slug } = ctx.params as Params;
 
   const product = await prisma.product.findFirst({
