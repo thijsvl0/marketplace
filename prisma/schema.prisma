@@ -18,8 +18,9 @@ model Product {
   userId String
 
   title       String
+  slug        String
   description String
-  price       Decimal
+  price       Float
   images      Image[]
 
   createdAt DateTime @default(now())

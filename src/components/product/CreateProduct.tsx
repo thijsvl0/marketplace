@@ -99,6 +99,7 @@ const CreateProduct: FC<CreateProductProps> = ({}) => {
           <Button
             className="justify-center sm:col-span-2"
             variant="outline"
+            type="button"
             onClick={() => setIsCreateModalOpen(false)}
           >
             Cancel

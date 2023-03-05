@@ -1,6 +1,7 @@
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 import { createProductSchema } from "../../../utils/validation/product";
+import slugify from "slugify";
 
 export const productRouter = createTRPCRouter({
   getMyProducts: protectedProcedure.query(async ({ ctx }) => {
@@ -30,6 +31,10 @@ export const productRouter = createTRPCRouter({
       await ctx.prisma.product.create({
         data: {
           title,
+          slug: `${Math.floor(1000 + Math.random() * 9000)}-${slugify(
+            title.slice(0, 40),
+            { lower: true }
+          )}`,
           description,
           price,
           user: {
