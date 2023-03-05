@@ -1,12 +1,12 @@
-import type { InferGetStaticPropsType } from "next";
+import type { InferGetServerSidePropsType } from "next";
 import { type NextPage } from "next";
 import Container from "../components/common/Container";
 import ProductList from "../components/product/ProductList";
 import { prisma } from "../server/db";
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  products,
-}) => {
+const Home: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ products }) => {
   return (
     <Container>
       <ProductList products={products} />
@@ -14,7 +14,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const products = await prisma.product.findMany({
     include: { images: true },
   });
@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
     props: {
       products,
     },
-    revalidate: 86400,
   };
 };
 
