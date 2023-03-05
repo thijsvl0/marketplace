@@ -3,7 +3,6 @@ import type { Product, Image as iImage } from "@prisma/client";
 import type { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import slugify from "slugify";
 
 interface ProductListProps {
   products: (Product & {
