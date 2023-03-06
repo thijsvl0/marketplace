@@ -6,6 +6,7 @@ import type {
 } from "next";
 
 import Container from "../../components/common/Container";
+import Head from "next/head";
 import type { ParsedUrlQuery } from "querystring";
 import ProductDetail from "../../components/product/ProductDetail";
 
@@ -17,9 +18,14 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   product,
 }) => {
   return (
-    <Container>
-      <ProductDetail product={product} />
-    </Container>
+    <>
+      <Head>
+        <title>{`${product.title} | ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
+      </Head>
+      <Container>
+        <ProductDetail product={product} />
+      </Container>
+    </>
   );
 };
 

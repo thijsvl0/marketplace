@@ -1,4 +1,4 @@
-import type { Product, Image as iImage } from "@prisma/client";
+import type { Product, User, Image as iImage } from "@prisma/client";
 
 import type { FC } from "react";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import Link from "next/link";
 interface ProductListProps {
   products: (Product & {
     images: iImage[];
+    user: User;
   })[];
 }
 
@@ -36,8 +37,9 @@ const ProductList: FC<ProductListProps> = ({ products }) => {
             <h3 className="truncate font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
               {product.title}
             </h3>
-            <p className="mt-1 text-sm text-gray-700">
-              ${product.price.toString()}
+            <p className="text-s mt-1 flex justify-between text-gray-700">
+              <span>${product.price.toString()}</span>
+              <span>{product.user.username}</span>
             </p>
           </div>
         </Link>
