@@ -6,9 +6,9 @@ import type {
 } from "next";
 
 import Container from "../../components/common/Container";
+import Detail from "../../components/product/Detail";
 import Head from "next/head";
 import type { ParsedUrlQuery } from "querystring";
-import ProductDetail from "../../components/product/ProductDetail";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -23,7 +23,7 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <title>{`${product.title} | ${process.env.NEXT_PUBLIC_SITE_NAME}`}</title>
       </Head>
       <Container>
-        <ProductDetail product={product} />
+        <Detail product={product} />
       </Container>
     </>
   );
@@ -42,7 +42,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   const { slug } = ctx.params as Params;
 
   const product = await prisma.product.findFirst({
-    include: { images: true },
+    include: { images: true, user: true },
     where: { slug },
   });
 

@@ -8,9 +8,9 @@ type Color = "primary" | "danger";
 type Variant = "outline" | "solid" | "transparant";
 
 const sizes = {
-  md: "py-2.5 px-5 rounded-md",
-  square: "p-2.5 rounded-md",
-  round: "p-2.5 rounded-full",
+  md: "py-2 px-4 rounded-md",
+  square: "p-2 rounded-md",
+  round: "p-2 rounded-full",
 };
 
 const variants: Record<Variant, Record<Color, string>> = {

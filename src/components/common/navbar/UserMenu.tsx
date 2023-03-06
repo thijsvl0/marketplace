@@ -22,12 +22,10 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
     return (
       <>
         <Link href="/auth/signin">
-          <Button>Login</Button>
+          <Button variant="outline">Login</Button>
         </Link>
         <Link href="/auth/signup">
-          <Button variant="outline" className="hidden sm:block">
-            Register
-          </Button>
+          <Button>Register</Button>
         </Link>
       </>
     );
@@ -53,7 +51,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-lg border border-gray-100 bg-white shadow-lg focus:outline-none">
-            <div className="px-1 py-1">
+            <div className="p-2">
               <Menu.Item>
                 <Button
                   className="w-full text-left"

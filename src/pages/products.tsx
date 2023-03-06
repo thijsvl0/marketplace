@@ -2,7 +2,7 @@ import type { InferGetServerSidePropsType, NextPage } from "next";
 
 import Container from "../components/common/Container";
 import Head from "next/head";
-import ProductList from "../components/product/ProductList";
+import ProductList from "../components/product/Catalog";
 
 const Products: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -23,7 +23,7 @@ export const getServerSideProps = async () => {
   const { prisma } = await import("../server/db");
 
   const products = await prisma.product.findMany({
-    include: { images: true, user: true },
+    include: { images: true },
   });
 
   return {
