@@ -15,7 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={twMerge(
-            "w-full rounded-lg border border-gray-200 p-4 shadow-sm sm:text-sm",
+            "w-full rounded-lg border border-gray-200 py-2.5 px-4 shadow-sm",
             Icon && "pr-12",
             className
           )}

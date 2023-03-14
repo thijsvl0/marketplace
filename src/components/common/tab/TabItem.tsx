@@ -22,7 +22,7 @@ const TabItem: FC<TabItemProps> = ({ children, link, isActive = false }) => {
         <div className="flex items-center justify-center">
           <span
             className={twMerge(
-              "text-sm font-medium hover:text-gray-700",
+              "font-medium hover:text-gray-700",
               isActive ? "text-gray-900" : "text-gray-500"
             )}
           >

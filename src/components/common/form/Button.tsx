@@ -8,9 +8,9 @@ type Color = "primary" | "danger";
 type Variant = "outline" | "solid" | "transparant";
 
 const sizes = {
-  md: "py-2 px-4 rounded-md",
-  square: "p-2 rounded-md",
-  round: "p-2 rounded-full",
+  md: "py-2.5 px-4 rounded-md",
+  square: "p-2.5 rounded-md",
+  round: "p-2.5 rounded-full",
 };
 
 const variants: Record<Variant, Record<Color, string>> = {
@@ -59,7 +59,7 @@ const Button: FC<ButtonProps> = React.forwardRef<
     return (
       <button
         className={twMerge(
-          "flex items-center justify-start gap-x-2 font-medium transition sm:text-sm",
+          "flex items-center justify-start gap-x-2 font-medium transition",
           sizes[size],
           variants[variant][color],
           className

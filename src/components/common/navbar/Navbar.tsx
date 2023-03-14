@@ -15,7 +15,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
   return (
     <div className="flex flex-1 items-center justify-end md:justify-between">
       <nav aria-label="Site Nav" className="hidden md:block">
-        <ul className="flex items-center gap-6 text-sm">
+        <ul className="flex items-center gap-6">
           {linkItems.map((linkItem) => (
             <li key={linkItem.link}>
               <Link href={linkItem.link} passHref legacyBehavior>

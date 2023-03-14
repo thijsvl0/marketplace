@@ -10,7 +10,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       <select
         ref={ref}
         className={twMerge(
-          "w-full rounded-lg border border-gray-200 p-4 shadow-sm sm:text-sm",
+          "w-full rounded-lg border border-gray-200 py-2.5 px-4 shadow-sm",
           className
         )}
         {...props}

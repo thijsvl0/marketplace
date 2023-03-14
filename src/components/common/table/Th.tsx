@@ -6,7 +6,7 @@ interface ThProps {
 
 const Th: FC<ThProps> = ({ children }) => {
   return (
-    <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+    <th className="whitespace-nowrap py-2.5 px-4 text-left font-medium text-gray-900">
       {children}
     </th>
   );

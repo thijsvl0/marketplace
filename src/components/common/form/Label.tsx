@@ -9,10 +9,7 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 const Label: FC<LabelProps> = ({ children, className, ...props }) => {
   return (
     <label
-      className={twMerge(
-        "mb-2 block font-medium text-gray-900 sm:text-sm",
-        className
-      )}
+      className={twMerge("mb-2 block font-medium text-gray-900", className)}
       {...props}
     >
       {children}

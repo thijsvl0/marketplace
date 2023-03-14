@@ -99,7 +99,7 @@ const Signup: NextPage = () => {
           />
 
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+            <p className="text-gray-500">
               Already have an account?
               <Link className="ml-1 underline" href="/auth/signin">
                 Sign in
